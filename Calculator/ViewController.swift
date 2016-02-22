@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     static let sharedInstance = ViewController()
     
+    //Setting up buttons and label
     var resultsLabel = UILabel()
     var button0 = UIButton()
     var button1 = UIButton()
@@ -42,122 +43,65 @@ class ViewController: UIViewController {
     func createResultsLabel() {
     
     resultsLabel.backgroundColor = UIColor.blackColor()
+    resultsLabel.text = "0"
+    resultsLabel.textAlignment = .Right
+    resultsLabel.textColor = UIColor.whiteColor()
+    resultsLabel.font = UIFont(name: "Apple SD Gothic Neo", size: 52)
     view.addSubview(resultsLabel)
     
     }
     
     func createButtons() {
-        let buttonArray = [button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonAdd, buttonSubtract, buttonMultiply, buttonDivide, buttonEnter]
+        let buttonArray = [button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonEnter, buttonAdd, buttonMultiply, buttonDivide, buttonSubtract]
         for button in buttonArray {
             button.titleLabel?.font = UIFont(name: "Apple SD Gothic Neo", size: 36)
             button.layer.cornerRadius = 8
+            button.backgroundColor = UIColor.lightGrayColor()
+            button.layer.borderColor = UIColor.blackColor().CGColor
+            button.layer.borderWidth = 2
+            button.clipsToBounds = true
+            button.addTarget(self, action: "appendDigit:", forControlEvents: .TouchUpInside)
+            view.addSubview(button)
         }
         
-        button7.backgroundColor = UIColor.lightGrayColor()
         button7.setTitle("7", forState: .Normal)
-        button7.layer.borderColor = UIColor.blackColor().CGColor
-        button7.layer.borderWidth = 2
-        button7.clipsToBounds = true
-        view.addSubview(button7)
-        
-        button8.backgroundColor = UIColor.lightGrayColor()
         button8.setTitle("8", forState: .Normal)
-        button8.layer.borderColor = UIColor.blackColor().CGColor
-        button8.layer.borderWidth = 2
-        button8.clipsToBounds = true
-        view.addSubview(button8)
-        
-        button9.backgroundColor = UIColor.lightGrayColor()
         button9.setTitle("9", forState: .Normal)
-        button9.layer.borderColor = UIColor.blackColor().CGColor
-        button9.layer.borderWidth = 2
-        button9.clipsToBounds = true
-        view.addSubview(button9)
+        button4.setTitle("4", forState: .Normal)
+        button5.setTitle("5", forState: .Normal)
+        button6.setTitle("6", forState: .Normal)
+        button1.setTitle("1", forState: .Normal)
+        button2.setTitle("2", forState: .Normal)
+        button3.setTitle("3", forState: .Normal)
+        button0.setTitle("0", forState: .Normal)
+        
         
         buttonDivide.backgroundColor = UIColor.orangeColor()
         buttonDivide.setTitle("/", forState: .Normal)
-        buttonDivide.layer.borderColor = UIColor.blackColor().CGColor
-        buttonDivide.layer.borderWidth = 2
-        buttonDivide.clipsToBounds = true
-        view.addSubview(buttonDivide)
+        buttonDivide.addTarget(self, action: "operate:", forControlEvents: .TouchUpInside)
         
-        button4.backgroundColor = UIColor.lightGrayColor()
-        button4.setTitle("4", forState: .Normal)
-        button4.layer.borderColor = UIColor.blackColor().CGColor
-        button4.layer.borderWidth = 2
-        button4.clipsToBounds = true
-        view.addSubview(button4)
-        
-        button5.backgroundColor = UIColor.lightGrayColor()
-        button5.setTitle("5", forState: .Normal)
-        button5.layer.borderColor = UIColor.blackColor().CGColor
-        button5.layer.borderWidth = 2
-        button5.clipsToBounds = true
-        view.addSubview(button5)
-        
-        button6.backgroundColor = UIColor.lightGrayColor()
-        button6.setTitle("6", forState: .Normal)
-        button6.layer.borderColor = UIColor.blackColor().CGColor
-        button6.layer.borderWidth = 2
-        button6.clipsToBounds = true
-        view.addSubview(button6)
         
         buttonMultiply.backgroundColor = UIColor.orangeColor()
         buttonMultiply.setTitle("x", forState: .Normal)
-        buttonMultiply.layer.borderColor = UIColor.blackColor().CGColor
-        buttonMultiply.layer.borderWidth = 2
-        buttonMultiply.clipsToBounds = true
-        view.addSubview(buttonMultiply)
+        buttonMultiply.addTarget(self, action: "operate:", forControlEvents: .TouchUpInside)
         
-        button1.backgroundColor = UIColor.lightGrayColor()
-        button1.setTitle("1", forState: .Normal)
-        button1.layer.borderColor = UIColor.blackColor().CGColor
-        button1.layer.borderWidth = 2
-        button1.clipsToBounds = true
-        view.addSubview(button1)
-        
-        button2.backgroundColor = UIColor.lightGrayColor()
-        button2.setTitle("2", forState: .Normal)
-        button2.layer.borderColor = UIColor.blackColor().CGColor
-        button2.layer.borderWidth = 2
-        button2.clipsToBounds = true
-        view.addSubview(button2)
-        
-        button3.backgroundColor = UIColor.lightGrayColor()
-        button3.setTitle("3", forState: .Normal)
-        button3.layer.borderColor = UIColor.blackColor().CGColor
-        button3.layer.borderWidth = 2
-        button3.clipsToBounds = true
-        view.addSubview(button3)
+
         
         buttonSubtract.backgroundColor = UIColor.orangeColor()
         buttonSubtract.setTitle("-", forState: .Normal)
-        buttonSubtract.layer.borderColor = UIColor.blackColor().CGColor
-        buttonSubtract.layer.borderWidth = 2
-        buttonSubtract.clipsToBounds = true
-        view.addSubview(buttonSubtract)
+        buttonSubtract.addTarget(self, action: "operate:", forControlEvents: .TouchUpInside)
         
-        button0.backgroundColor = UIColor.lightGrayColor()
-        button0.setTitle("0", forState: .Normal)
-        button0.layer.borderColor = UIColor.blackColor().CGColor
-        button0.layer.borderWidth = 2
-        button0.clipsToBounds = true
-        view.addSubview(button0)
+        
         
         buttonEnter.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.5)
         buttonEnter.setTitle("Enter", forState: .Normal)
-        buttonEnter.layer.borderColor = UIColor.blackColor().CGColor
-        buttonEnter.layer.borderWidth = 2
-        buttonEnter.clipsToBounds = true
-        view.addSubview(buttonEnter)
+        buttonEnter.addTarget(self, action: "enter", forControlEvents: .TouchUpInside)
+        
         
         buttonAdd.backgroundColor = UIColor.orangeColor()
         buttonAdd.setTitle("+", forState: .Normal)
-        buttonAdd.layer.borderColor = UIColor.blackColor().CGColor
-        buttonAdd.layer.borderWidth = 2
-        buttonAdd.clipsToBounds = true
-        view.addSubview(buttonAdd)
-    }
+        buttonAdd.addTarget(self, action: "operate:", forControlEvents: .TouchUpInside)
+        }
     
     func addConstraints() {
         resultsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -349,5 +293,76 @@ class ViewController: UIViewController {
         view.addConstraint(buttonAddWidth)
 
     }
+    
+    //MARK: - Calculator
+    
+    //Implementing the stack
+    var displayResult: Float {
+        get {
+            let text = resultsLabel.text ?? "0"
+            return (text as NSString).floatValue
+        }
+        
+        set {
+            resultsLabel.text = "\(newValue)"
+            isInTheMiddleOfTyping = false
+        }
+    }
+    var isInTheMiddleOfTyping = false
+    var stack = Stack()
+
+    
+    func appendDigit(button: UIButton) {
+        guard let digit = button.currentTitle else { return }
+        
+        if isInTheMiddleOfTyping {
+            let resultText = resultsLabel.text ?? ""
+            resultsLabel.text = resultText + digit
+        } else {
+            resultsLabel.text = digit
+            isInTheMiddleOfTyping = true
+        }
+    }
+    
+    func enter() {
+        isInTheMiddleOfTyping = false
+        stack.push(displayResult)
+        stack.log()
+    }
+    
+    func operate(button: UIButton) {
+        guard let operation = button.currentTitle else { return }
+        
+        if isInTheMiddleOfTyping {
+            enter()
+        }
+        
+        if stack.count() >= 2 {
+            let num1 = stack.pop()!
+            let num2 = stack.pop()!
+            
+            switch operation {
+            case "/":
+                displayResult = num2 / num1
+            case "x":
+                displayResult = num2 * num1
+            case "-":
+                displayResult = num2 - num1
+            case "+":
+                displayResult = num2 + num1
+            default:
+                stack.push(num1)
+                stack.push(num2)
+                
+            }
+            
+            enter()
+        }
+        
+    }
+
+    
+    
+    
     
 }
